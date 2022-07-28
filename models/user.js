@@ -60,6 +60,11 @@ userSchema.methods.deleteCart = function(productId) {
   return this.save();
 };
 
+userSchema.methods.clearCart = function() {
+  this.cart = { items: [] };
+  return this.save();
+};
+
 //   addToCart(product) {
 //     const cartProductIndex = this.cart.items.findIndex(cp => {
 //       return cp.productId.toString() === product._id.toString();
