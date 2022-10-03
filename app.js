@@ -3,6 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const errorController = require("./controllers/error");
 const mongoose = require("mongoose");
+require("dotenv").config();
 
 const User = require("./models/user");
 
@@ -31,10 +32,10 @@ app.use(shopRoutes);
 
 app.use(errorController.get404);
 
+const MONGODB_URL = process.env.MONGODB_CONNECTION_URL;
+
 mongoose
-  .connect(
-    "mongodb+srv://tobi:tobi1234@nodeninja.6cx5y.mongodb.net/shop?retryWrites=true&w=majority"
-  )
+  .connect(MONGODB_URL)
   .then(result => {
     User.findOne().then(user => {
       if (!user) {
